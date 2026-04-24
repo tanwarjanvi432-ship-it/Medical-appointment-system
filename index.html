@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Medical Appointment System</h2>
+
+<form action="/book" method="post">
+
+Name: <input name="name"><br><br>
+Age: <input name="age"><br><br>
+Gender: <input name="gender"><br><br>
+Phone: <input name="phone"><br><br>
+Spouse: <input name="spouse"><br><br>
+Address: <input name="address"><br><br>
+
+Doctor:
+<select name="doctor">
+{% for d in doctors %}
+<option value="{{d[0]}}">
+{{d[1]}} ({{d[2]}})
+</option>
+{% endfor %}
+</select><br><br>
+
+Date: <input type="date" name="date"><br><br>
+
+Time Slot:
+<select name="slot">
+<option>09:00 AM</option>
+<option>10:00 AM</option>
+<option>11:00 AM</option>
+<option>12:00 PM</option>
+<option>01:00 PM</option>
+</select><br><br>
+
+<button type="submit">Book Appointment</button>
+</form>
+
+<hr>
+
+<h3>Delete Appointment</h3>
+<form action="/delete" method="post">
+Appointment ID: <input name="appointment_id">
+<button type="submit">Delete</button>
+</form>
+
+<hr>
+
+<h3>Doctor Appointment Count</h3>
+{% for c in counts %}
+<p>{{c[0]}} → {{c[1]}} appointments</p>
+{% endfor %}
+
+<hr>
+
+<h3>View Appointments</h3>
+<a href="/view">Click to View</a>
+
+{% if data %}
+<table border="1">
+<tr>
+<th>ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Slot</th>
+</tr>
+{% for row in data %}
+<tr>
+<td>{{row[0]}}</td>
+<td>{{row[1]}}</td>
+<td>{{row[2]}}</td>
+<td>{{row[3]}}</td>
+<td>{{row[4]}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+</body>
+</html>
